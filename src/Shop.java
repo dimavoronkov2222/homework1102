@@ -5,9 +5,21 @@ public class Shop extends Building {
         super(address);
         this.departments = departments;
     }
+    public List<DepartmentType> getDepartments() {
+        return departments;
+    }
     @Override
     public void setFields(String data) {
-        // Разбор строки для установки отделов
+        try {
+            String[] parts = data.split(",\\s*");
+            departments.clear();
+            for (String part : parts) {
+                DepartmentType department = DepartmentType.valueOf(part.trim().toUpperCase());
+                departments.add(department);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: некорректное значение типа отдела - " + e.getMessage());
+        }
     }
     @Override
     public void displayInfo() {

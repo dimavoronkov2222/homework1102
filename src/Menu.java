@@ -17,7 +17,13 @@ public class Menu {
                 case 1 -> street.showStreetInfo();
                 case 2 -> street.addBuilding(MenuUtils.createBuilding(scanner));
                 case 3 -> street.removeBuilding(MenuUtils.getAddressInput(scanner));
-                case 4 -> street.findShopsNearHouse(MenuUtils.getDepartmentTypeInput(scanner));
+                case 4 -> {
+                    Address address = MenuUtils.getAddressInput(scanner);
+                    DepartmentType departmentType = MenuUtils.getDepartmentTypeInput(scanner);
+                    System.out.print("Введите диапазон поиска (количество домов): ");
+                    int range = scanner.nextInt();
+                    street.findShopsNearHouse(address, departmentType, range);
+                }
                 case 0 -> System.exit(0);
             }
         }
